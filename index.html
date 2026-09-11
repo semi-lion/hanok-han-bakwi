@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#F5EFE2" />
+    <title>옛날 옛적에</title>
+    <script type="module" crossorigin src="/hanok-han-bakwi/assets/index-D_qFZmq0.js"></script>
+    <link rel="modulepreload" crossorigin href="/hanok-han-bakwi/assets/three-D8EUbc9c.js">
+    <link rel="stylesheet" crossorigin href="/hanok-han-bakwi/assets/index-Bs8Jjqw8.css">
+  </head>
+  <body>
+    <canvas id="scene"></canvas>
+
+    <!-- 첫 화면 — 편 고르기. 주소에 #편 이 없을 때만 보인다. 카드는 main.js 가 scenes/index.js 로 채운다. -->
+    <div id="menu" class="hidden">
+      <header class="menu-header">
+        <span class="menu-eyebrow">우리나라 이야기 놀이터</span>
+        <h1 id="menu-title">옛날 옛적에<span class="menu-title-dot">.</span></h1>
+        <p id="menu-sub">궁금한 그림을 톡! 옛날로 놀러 가요.</p>
+      </header>
+      <div id="menu-cards"></div>
+    </div>
+
+    <h1 id="title">한옥 한 바퀴</h1>
+
+    <div id="tools">
+      <button id="btn-menu" class="tool" type="button" aria-label="다른 편 고르기">
+        <span class="tool-icon">📚</span><span class="tool-text">다른 편</span>
+      </button>
+      <button id="btn-home" class="tool" type="button" aria-label="처음 자리로">
+        <span class="tool-icon">🏠</span><span class="tool-text">처음 자리로</span>
+      </button>
+      <button id="btn-pan" class="tool" type="button" aria-label="옆 이동 모드" aria-pressed="false">
+        <span class="tool-icon">↔️</span><span class="tool-text">옆 이동</span>
+      </button>
+      <button id="btn-list" class="tool" type="button" aria-label="전부 보기">
+        <span class="tool-icon">📋</span><span class="tool-text">전부 보기</span>
+      </button>
+      <button id="btn-sound" class="tool" type="button" aria-label="소리 끄기">
+        <span class="tool-icon">🔊</span><span class="tool-text">소리 끄기</span>
+      </button>
+    </div>
+
+    <div id="sun">
+      <span class="sun-end" aria-hidden="true">🌅</span>
+      <input id="sun-slider" type="range" min="0" max="1000" value="620" aria-label="하루의 시간" />
+      <span class="sun-end" aria-hidden="true">🌙</span>
+    </div>
+
+    <div id="label" class="hidden" aria-live="polite">
+      <div id="label-main">
+        <!-- 카드 안 양끝 화살표 — 글씨 없이. 카드 자체를 좌우로 밀어도 넘어간다 -->
+        <button id="btn-prev" class="nav-arrow" type="button" aria-label="이전 것 보기">‹</button>
+        <div id="label-text">
+          <div id="label-name"></div>
+          <div id="label-say"></div>
+        </div>
+        <div id="label-buttons">
+          <button id="btn-today" class="today-btn hidden" type="button">
+            <span class="today-icon">🔎</span><span>요즘엔?</span>
+          </button>
+        </div>
+        <button id="btn-next" class="nav-arrow" type="button" aria-label="다음 것 보기">›</button>
+      </div>
+      <div id="label-today" class="hidden">
+        <canvas id="today-canvas" width="220" height="220"></canvas>
+        <div id="today-text">
+          <div id="today-name"></div>
+          <div id="today-say"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="hint" class="hidden" aria-hidden="true">👆</div>
+
+    <!-- 전부 보기 — 이 편의 사물 목록. 누르면 카메라가 그리로 가고 이름표가 뜬다. 찾은 것은 ✓ -->
+    <div id="list" class="hidden">
+      <div id="list-panel">
+        <div id="list-head">
+          <span id="list-title">전부 보기</span>
+          <span id="list-count"></span>
+          <button id="btn-list-close" class="tool" type="button" aria-label="닫기"><span class="tool-icon">✖️</span></button>
+        </div>
+        <div id="list-items"></div>
+      </div>
+    </div>
+
+  </body>
+</html>
