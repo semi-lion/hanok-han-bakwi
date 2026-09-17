@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>한국어 TTS 모델 비교</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #faf7f2;
+    --card-bg: #ffffff;
+    --text: #2b2620;
+    --sub: #6b6459;
+    --accent: #b5651d;
+    --border: #e6ddd0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    padding: 20px 16px 60px;
+  }
+  h1 {
+    font-size: 26px;
+    margin: 4px 0 6px;
+  }
+  .lead {
+    color: var(--sub);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 22px;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 18px 20px;
+    margin-bottom: 18px;
+  }
+  .card h2 {
+    font-size: 22px;
+    margin: 0 0 4px;
+  }
+  .meta {
+    font-size: 14px;
+    color: var(--sub);
+    line-height: 1.6;
+    margin: 0 0 14px;
+  }
+  .meta b { color: var(--text); }
+  .sentence {
+    margin: 14px 0;
+  }
+  .sentence .text {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  audio {
+    width: 100%;
+    height: 42px;
+  }
+  .fail {
+    background: var(--card-bg);
+    border: 1px dashed var(--border);
+    border-radius: 16px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    color: var(--sub);
+    font-size: 15px;
+  }
+  .fail b { color: var(--text); }
+  .note {
+    font-size: 13px;
+    color: var(--sub);
+    margin-top: 24px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<h1>한국어 TTS 모델 비교</h1>
+<p class="lead">
+  만 4~6세 아이에게 읽어주는 톤 기준: 유치원 선생님이나 박물관 해설사가 아이에게
+  설명하듯, 또렷하고 차분하게, 조금 느리게. 같은 문장 3개를 모델별로 들어보세요.
+</p>
+
+<div class="card">
+  <h2>Qwen3-TTS (Sohee, CustomVoice)</h2>
+  <p class="meta">라이선스: Qwen 모델 라이선스 · 특징: 앱에 실제 쓰이는 목소리, 커스텀 보이스 프롬프트 방식</p>
+  <div class="sentence">
+    <div class="text">1. "아궁이."</div>
+    <audio controls src="/compare/qwen3/1.mp3"></audio>
+  </div>
+  <div class="sentence">
+    <div class="text">2. "여기에 불을 때면 밥도 짓고, 방도 따뜻해져요."</div>
+    <audio controls src="/compare/qwen3/2.mp3"></audio>
+  </div>
+  <div class="sentence">
+    <div class="text">3. "창호지 문. 나무 틀에 얇은 종이를 발라서 만든 문이에요."</div>
+    <audio controls src="/compare/qwen3/3.mp3"></audio>
+  </div>
+</div>
+
+<div class="card">
+  <h2>edge-tts (ko-KR-SunHiNeural)</h2>
+  <p class="meta">라이선스: 마이크로소프트 Azure 음성 서비스를 무료로 우회 호출하는 비공식 API — <b>서비스 약관상 회색 지대</b>, 상용 배포에는 권장하지 않음 · 특징: 속도 -10%, 자연스러운 여성 성우 톤</p>
+  <div class="sentence">
+    <div class="text">1. "아궁이."</div>
+    <audio controls src="/compare/edge-sunhi/1.mp3"></audio>
+  </div>
+  <div class="sentence">
+    <div class="text">2. "여기에 불을 때면 밥도 짓고, 방도 따뜻해져요."</div>
+    <audio controls src="/compare/edge-sunhi/2.mp3"></audio>
+  </div>
+  <div class="sentence">
+    <div class="text">3. "창호지 문. 나무 틀에 얇은 종이를 발라서 만든 문이에요."</div>
+    <audio controls src="/compare/edge-sunhi/3.mp3"></audio>
+  </div>
+</div>
+
+<div class="fail">
+  <b>edge-tts (ko-KR-JiMinNeural)</b> — 스킵. 현재 edge-tts가 제공하는 ko-KR 목소리 목록에
+  더 이상 JiMin이 없음(SunHi · InJoon · HyunsuMultilingual만 확인됨).
+</div>
+
+<div class="card">
+  <h2>Chatterbox Multilingual (기본 목소리, ko)</h2>
+  <p class="meta">라이선스: MIT (Resemble AI) · 특징: 기본 프롬프트 목소리, 은은한 워터마크 내장(Perth)</p>
+  <div class="sentence">
+    <div class="text">1. "아궁이."</div>
+    <audio controls src="/compare/chatterbox/1.mp3"></audio>
+  </div>
+  <div class="sentence">
+    <div class="text">2. "여기에 불을 때면 밥도 짓고, 방도 따뜻해져요."</div>
+    <audio controls src="/compare/chatterbox/2.mp3"></audio>
+  </div>
+  <div class="sentence">
+    <div class="text">3. "창호지 문. 나무 틀에 얇은 종이를 발라서 만든 문이에요."</div>
+    <audio controls src="/compare/chatterbox/3.mp3"></audio>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Chatterbox Multilingual (Sohee 클론)</h2>
+  <p class="meta">라이선스: MIT (Resemble AI) · 특징: <code>gamasot-say-0.mp3</code>를 레퍼런스로 목소리 복제, 제로샷 클로닝 품질 확인용</p>
+  <div class="sentence">
+    <div class="text">1. "아궁이."</div>
+    <audio controls src="/compare/chatterbox-clone/1.mp3"></audio>
+  </div>
+  <div class="sentence">
+    <div class="text">2. "여기에 불을 때면 밥도 짓고, 방도 따뜻해져요."</div>
+    <audio controls src="/compare/chatterbox-clone/2.mp3"></audio>
+  </div>
+  <div class="sentence">
+    <div class="text">3. "창호지 문. 나무 틀에 얇은 종이를 발라서 만든 문이에요."</div>
+    <audio controls src="/compare/chatterbox-clone/3.mp3"></audio>
+  </div>
+</div>
+
+<div class="fail">
+  <b>MeloTTS-Korean (MIT)</b> — 스킵. 한국어 경로가 <code>mecab-python3</code>(일본어 모듈이 무조건
+  요구)와 <code>python-mecab-ko</code>(한국어 g2p가 요구)를 동시에 설치해야 하는데, 두 패키지가
+  같은 <code>MeCab/</code> 네임스페이스를 덮어써서 한쪽을 설치하면 다른 쪽이 깨지는 충돌이 있음.
+  이 venv에서는 우회하지 못해 시간 예산 안에 포기.
+</div>
+
+<div class="fail">
+  <b>CosyVoice2-0.5B (Apache)</b> — 스킵. 남은 작업 시간 안에 설치·검증까지 마치기 어려워
+  보류(설치 자체를 시도하지 않음). 필요하면 별도 세션에서 이어서 진행 권장.
+</div>
+
+<p class="note">
+  생성: tools/compare/make-samples.py · 오디오는 22kHz 모노, ffmpeg astats로 피크를 측정해
+  -1dBFS로 정규화(Qwen3 기존 클립 제외, 재생성 금지 원본 그대로 사용).
+</p>
+
+</body>
+</html>
